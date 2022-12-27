@@ -17,7 +17,7 @@ import { User } from './submodules/backend-refresher-1.0-entities/src/entities/u
       database: 'backend-socialmedia',
       entities: [ User ],
       synchronize: false,
-      logging: true
+      logging: false
     }),
 
     UserModule
