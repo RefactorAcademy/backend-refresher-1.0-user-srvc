@@ -26,6 +26,24 @@ export class UserService {
 
   }
 
+  async fetchUserByEmail(email: string){
+    try{
+
+    let user = await this.userRepository.createQueryBuilder("user")
+                                        .where(`user.email = '${email}'`) 
+                                        .getOne()
+                                        console.log({user})
+
+     if(user)
+       return user;
+      else
+     return null;                                 
+    }
+  catch(err){
+    throw err;
+  }
+  }
+
   async findAll(){
     try{
       let retrievedUsers = await this.userRepository.find();

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { UserDto } from 'src/submodules/backend-refresher-1.0-dtos/src/dtos/user.dto';
 import { UserService } from './user.service';
 
@@ -18,6 +18,19 @@ export class UserController {
      } 
   }
 
+  @Get('/email')
+  async findUserByEmail(@Query() query: { email: string }){
+    try{
+      console.log("Proceeding to find user")
+      let fetchedUser = await this.userService.fetchUserByEmail(query.email);
+      return fetchedUser;
+    }
+    catch(err){
+      console.log(err);
+      return err;
+    }
+  }
+
   @Get()
   async findUser(){
     try{
@@ -29,6 +42,8 @@ export class UserController {
       return err;
     }
   }
+
+  
 
   @Put()
   async updateUser(@Body()user: UserDto){
